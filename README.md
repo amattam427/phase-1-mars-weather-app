@@ -25,3 +25,6 @@ The corresponding date on earth will also appear for the user.
 
     * as a user i can click view more to see extra weather related info
 
+    * as a user i can enter a sol number into a form and search for that sol
+      and the app will populate with info from selected sol
+
