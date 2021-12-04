@@ -47,7 +47,7 @@ function initWeather () {
 // define a function that returns a random number to plug into api
 // to query random numbered picture
 
-// define a functio that converts celsius to farenheit
+// define a function that converts celsius to farenheit
 
 // define a function that toggles the farenheit/celsius when clicked
 
@@ -59,3 +59,5 @@ function initWeather () {
 
 // define a function that changes the background or color style
 // based on time of day in relation to before sunrise, during the day, and after sunset
+
+// define a function that can fetch any previous sol and then populate app with data
