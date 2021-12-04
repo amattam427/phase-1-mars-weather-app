@@ -1,5 +1,13 @@
 # phase-1-mars-weather-app
 
+## about
+
+A weather app for the people of Mars! This single page application will fetch data from the [NASA Mars Rover API](https://api.nasa.gov/) 
+to display random pictures when the page loads. It will also use the [MAAS2 Rest API](https://maas2.apollorion.com/)
+to populate the app with data including Sol, Season, Temperatures, Sunrise and Sunset, Atmosphere Opacity, Pressure, UV Irradiance, Humidity and Wind Speed.
+The user will also be able to choose between Farenheit and Celsius to view the temperature.
+The corresponding date on earth will also appear for the user.
+
 ## deliverables
 
     * as a user when i load the page , it populates with the weather app home page data
