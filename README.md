@@ -23,3 +23,5 @@ The corresponding date on earth will also appear for the user.
     * as a user when i visit the app during the morning, afternoon, and night i will 
       see a different background based on the time of day
 
+    * as a user i can click view more to see extra weather related info
+
