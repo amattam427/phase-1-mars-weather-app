@@ -24,8 +24,8 @@ function initWeather () {
     fetch(weatherEndpoint)
     .then(res => res.json())
     .then(solObject => {
-        const todaysSol = solObject.sol;
-        const conditions = solObject.atmo_opacity;
+        const todaysSol = solObject.sol; 
+        const weatherConditions = solObject.atmo_opacity;
         const uvIrradiance = solObject.local_uv_irradiance_index;
         const hiTemp = solObject.max_temp;
         const lowTemp = solObject.min_temp;
@@ -37,9 +37,10 @@ function initWeather () {
 
         // here we will need to grab html element containers
         // then create new html elements for this info and populate
-
-    });
+        
+    })
 }
+
 
 // define a function to return a number that is the sol to query for pictures
 

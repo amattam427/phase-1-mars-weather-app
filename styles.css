@@ -29,4 +29,15 @@ p {
     line-height: 1rem;
 }
 
+header {
+    background-color: black;
+}
 
+#title {
+    text-align: center;
+    color: white;
+}
+
+#logo {
+    text-align: center;
+}
