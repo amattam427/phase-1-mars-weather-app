@@ -1,43 +1,94 @@
- /* BASIC STYLES */
+/* BASIC STYLES */
 
 * {
-    box-sizing: border-box;
-    font-size: 20px;
-    font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
 }
 
 h1 {
-    font-size: 5rem;
-    font-family: 'Rock Salt', cursive;
-    color: black;
+  font-size: 5rem;
+  font-family: "Rock Salt", cursive;
+  color: black;
 }
 
 h3 {
-    font-size: 3rem;
+  font-size: 3rem;
 }
 
 h4 {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 h5 {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 p {
-    font-size: 1rem;
-    line-height: 1rem;
+  font-size: 1rem;
+  line-height: 1rem;
 }
 
 header {
-    background-color: black;
+  background-color: black;
 }
 
 #title {
-    text-align: center;
-    color: white;
+  text-align: center;
+  color: white;
 }
 
 #logo {
-    text-align: center;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+img {
+  height: 300px;
+  width: 300px;
+  margin: 20px;
+  border: 2px solid black;
+}
+
+#sol-container {
+  border: 2px solid black;
+  padding: 20px;
+}
+
+#sol-container > h4 {
+  text-align: center;
+}
+
+#temperature-container {
+  border: 2px solid black;
+  flex-basis: 1;
+}
+
+#sun-container {
+  border: 2px solid black;
+  flex-basis: 1;
+}
+
+#container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#image-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#conditions-container {
+  border: 2px solid black;
+  text-align: center;
+}
+
+button {
+  border-radius: 10px;
+  background-color: goldenrod;
+  border: 1px solid black;
 }
