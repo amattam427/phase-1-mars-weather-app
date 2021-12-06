@@ -40,11 +40,6 @@ viewMoreButton.addEventListener('click', () => {
 // add event listener for click on clothing recs
 // add event listener for toggle temp
 
-function getRandomNumberPic () {
-    const num = Math.ceil(Math.random() * 19);
-    return num;
-}
-
 function getRandomSol() {
     const solToQuery = Math.ceil(Math.random() * 3314);
     return solToQuery;
@@ -54,12 +49,21 @@ function initPictures () {
     const pictureData = fetch(filterBySolEndpoint)
     .then(res => res.json())
     .then(data => {
+        console.log(data.photos.length)
+        const howManyPhotos = data.photos.length;
+        function getRandomNumberPic () {
+            const num = Math.ceil(Math.random() * howManyPhotos);
+            return num;
+        }
         const photoToShow1 = data.photos[getRandomNumberPic()];
         const photoToShow2 = data.photos[getRandomNumberPic()];
         const photoToShow3 = data.photos[getRandomNumberPic()];
         const image1 = document.createElement('img');
         const image2 = document.createElement('img');
         const image3 = document.createElement('img');
+        // const caption1 = document.createElement('caption');
+        // const caption2 = document.createElement('caption');
+        // const caption3 = document.createElement('caption');
         image1.src = photoToShow1.img_src;
         image2.src = photoToShow2.img_src;
         image3.src = photoToShow3.img_src;
