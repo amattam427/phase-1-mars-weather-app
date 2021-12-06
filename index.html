@@ -9,7 +9,7 @@
     <script defer src="index.js" charset="utf-8"></script>
 </head>
 
-<body>
+<body id="body">
     <header>
         <h4 id="title">mars-weather-app</h4>
     </header>
@@ -27,12 +27,15 @@
 
     <div id="conditions-container">
         <h4>CONDITIONS: <span id="conditions"></span></h4>
-        <button id="clothing-recs">get clothing recommendations!</button>
+        <button id="clothing-recs">get recommendations!</button>
     </div>
+    <div id="recs-modal" class="hidden">
 
+    </div>
+    <div id="container">
     <div id="temperature-container">
-        <h4>HIGH TEMP: <span id="hi-temp"></span> degrees</h4>
-        <h4>LOW TEMP: <span id="low-temp"></span> degrees</h4>
+        <h4>HIGH TEMP: <span id="hi-temp"></span> degrees <span id="c-or-f">C</span></h4>
+        <h4>LOW TEMP: <span id="low-temp"></span> degrees <span id="c-or-f">C</span></h4>
         <button id="toggle-temp">toggle f/c</button>
     </div>
 
@@ -41,9 +44,8 @@
         <h4>SUNSET: <span id="sunset"></span> pm</h4>
         <button id="view-more">view <span id="more-or-less">more</span> weather info</button>
     </div>
-
+    </div>
     <div id="xt-info-modal" class="hidden">
-        <p>this will be hidden and show on click of more info button</p>
         <p>UV Irradiance: <span id="uv"></span></p>
         <p>Pressure: <span id="pressure"></span></p>
         <p>Humidity: <span id="humidity"></span></p>
