@@ -14,20 +14,40 @@
         <h4 id="title">mars-weather-app</h4>
     </header>
     <h1 id="logo">mars</h1>
-    <div id="sol-container">
 
+    <div id="sol-container">
+        <h4>SOL: <span id="sol-number"></span></h4>
+        <h4>SEASON: <span id="szn-number"></span></h4>
+        <h4>DATE ON EARTH: <span id="earth-date"></span></h4>
     </div>
 
     <div id="image-container">
+     
+    </div>
 
+    <div id="conditions-container">
+        <h4>CONDITIONS: <span id="conditions"></span></h4>
+        <button id="clothing-recs">get clothing recommendations!</button>
     </div>
 
     <div id="temperature-container">
-
+        <h4>HIGH TEMP: <span id="hi-temp"></span> degrees</h4>
+        <h4>LOW TEMP: <span id="low-temp"></span> degrees</h4>
+        <button id="toggle-temp">toggle f/c</button>
     </div>
 
     <div id="sun-container">
+        <h4>SUNRISE: <span id="sunrise"></span> am</h4>
+        <h4>SUNSET: <span id="sunset"></span> pm</h4>
+        <button id="view-more">view <span id="more-or-less">more</span> weather info</button>
+    </div>
 
+    <div id="xt-info-modal" class="hidden">
+        <p>this will be hidden and show on click of more info button</p>
+        <p>UV Irradiance: <span id="uv"></span></p>
+        <p>Pressure: <span id="pressure"></span></p>
+        <p>Humidity: <span id="humidity"></span></p>
+        <p>Wind Speed: <span id="wind"></span></p>
     </div>
     <footer>
 
