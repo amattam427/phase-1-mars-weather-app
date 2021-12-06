@@ -1,10 +1,9 @@
 const weatherEndpoint = 'https://api.maas2.apollorion.com/';
 
 // sol here needs to correspond to sol fetched by weather API
-let sol = 3317; 
-let page = 1;
+let sol = getRandomSol();
 const pictureAPIKey = 'cO4ZKLydH6VHd21eDz3InRVoJISzRK6UQBTflnD9';
-const filterBySolEndpoint = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=${sol}&page=${page}&api_key=${pictureAPIKey}`;
+const filterBySolEndpoint = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=${sol}&api_key=${pictureAPIKey}`;
 
 // html elements to grab
 const solSpan = document.getElementById('sol-number');
@@ -28,7 +27,7 @@ const degrees = document.querySelectorAll('#c-or-f');
 
 document.addEventListener('DOMContentLoaded', initPictures);
 document.addEventListener('DOMContentLoaded', initWeather);
-viewMoreButton.addEventListener('click', (e) => {
+viewMoreButton.addEventListener('click', () => {
     const moreOrLess = document.getElementById('more-or-less');
     infoModal.classList.toggle('hidden');
        if (moreOrLess.innerText === 'more') {
@@ -41,14 +40,30 @@ viewMoreButton.addEventListener('click', (e) => {
 // add event listener for click on clothing recs
 // add event listener for toggle temp
 
+function getRandomNumberPic () {
+    const num = Math.ceil(Math.random() * 19);
+    return num;
+}
+
+function getRandomSol() {
+    const solToQuery = Math.ceil(Math.random() * 3314);
+    return solToQuery;
+}
 
 function initPictures () {
     const pictureData = fetch(filterBySolEndpoint)
     .then(res => res.json())
     .then(data => {
-        // data.photos.forEach(picture => {
-        //     console.log(picture)
-        // })
+        const photoToShow1 = data.photos[getRandomNumberPic()];
+        const photoToShow2 = data.photos[getRandomNumberPic()];
+        const photoToShow3 = data.photos[getRandomNumberPic()];
+        const image1 = document.createElement('img');
+        const image2 = document.createElement('img');
+        const image3 = document.createElement('img');
+        image1.src = photoToShow1.img_src;
+        image2.src = photoToShow2.img_src;
+        image3.src = photoToShow3.img_src;
+        imageContainer.append(image1, image2, image3);
     })
     return pictureData;
 }
@@ -115,12 +130,6 @@ function clothingRecs() {
 
 }
 
-// format date function
-
-// define a function to return a number that is the sol to query for pictures (max number is 3000)
-
-// define a function that returns a random number to plug into api
-// to query random page number picture (max number is 50)
 
 // define a function that converts celsius to farenheit
 
