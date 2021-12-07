@@ -23,22 +23,70 @@ const viewMoreButton = document.getElementById('view-more');
 const toggleButton = document.getElementById('toggle-temp');
 const infoModal = document.getElementById('xt-info-modal');
 const recsModal = document.getElementById('recs-modal');
+const modalOuter = document.querySelector('.modal-outer');
+const modalOuter2 = document.querySelector('.modal-outer-2');
 
 
 // event listeners
 document.addEventListener('DOMContentLoaded', initPictures);
 document.addEventListener('DOMContentLoaded', initWeather);
-viewMoreButton.addEventListener('click', () => {
-    const moreOrLess = document.getElementById('more-or-less');
-    infoModal.classList.toggle('hidden');
-       if (moreOrLess.innerText === 'more') {
-           moreOrLess.innerText = 'less';
-       } else if (moreOrLess.innerText === 'less') {
-           moreOrLess.innerText = 'more';
-       }
-});
+// viewMoreButton.addEventListener('click', () => {
+//     const moreOrLess = document.getElementById('more-or-less');
+//     infoModal.classList.toggle('hidden');
+//        if (moreOrLess.innerText === 'more') {
+//            moreOrLess.innerText = 'less';
+//        } else if (moreOrLess.innerText === 'less') {
+//            moreOrLess.innerText = 'more';
+//        }
+// });
 
 // add event listener for click on clothing recs
+clothingButton.addEventListener('click', () => {
+    modalOuter2.classList.add('open-2');
+});
+
+modalOuter2.addEventListener('click', function(event) {
+    const isOutside = !event.target.closest('.modal-inner-2');
+    if (isOutside) {
+      closeModal2();
+    }
+  });
+
+window.addEventListener('keydown', event => {
+    console.log(event);
+    if (event.key === 'Escape') {
+      closeModal2();
+    }
+  });
+
+function closeModal2() {
+    modalOuter2.classList.remove('open-2');
+  }
+
+
+
+viewMoreButton.addEventListener('click', () => {
+    modalOuter.classList.add('open');
+});
+
+modalOuter.addEventListener('click', function(event) {
+    const isOutside = !event.target.closest('.modal-inner');
+    if (isOutside) {
+      closeModal();
+    }
+  });
+
+window.addEventListener('keydown', event => {
+    console.log(event);
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  });
+
+function closeModal() {
+    modalOuter.classList.remove('open');
+  }
+// add event listener for search and function
 
 function getRandomSol() {
     const solToQuery = Math.ceil(Math.random() * 3314);
@@ -49,7 +97,7 @@ function initPictures () {
     const pictureData = fetch(filterBySolEndpoint)
     .then(res => res.json())
     .then(data => {
-        if (data.photos.length >= 1) {
+        if (data.photos.length >= 3) {
         const howManyPhotos = data.photos.length;
         function getRandomNumberPic () {
             const num = Math.ceil(Math.random() * howManyPhotos);
@@ -96,8 +144,7 @@ function initWeather () {
         humiditySpan.innerText = solObject.abs_humidity || 'not currently available';
         windSpan.innerText = solObject.wind_speed || 'not currently available';
         
-        toggleButton.addEventListener('click', (e) => {
-            console.log(e);
+        toggleButton.addEventListener('click', () => {
             cOrF();
         });
 
@@ -146,7 +193,6 @@ function convertFToC (fahrenheit) {
 function timeOfDay () {
     const now = new Date ();
     const currentHour = now.getHours();
-    console.log(currentHour)
     const body = document.getElementById('body');
     if (currentHour < 6 || currentHour >= 19) {
         body.style.backgroundColor = '#191970';
