@@ -22,8 +22,8 @@ const clothingButton = document.getElementById('clothing-recs');
 const viewMoreButton = document.getElementById('view-more');
 const toggleButton = document.getElementById('toggle-temp');
 const infoModal = document.getElementById('xt-info-modal');
-const degrees = document.querySelectorAll('#c-or-f');
 const recsModal = document.getElementById('recs-modal');
+
 
 // event listeners
 document.addEventListener('DOMContentLoaded', initPictures);
@@ -39,7 +39,6 @@ viewMoreButton.addEventListener('click', () => {
 });
 
 // add event listener for click on clothing recs
-// add event listener for toggle temp
 
 function getRandomSol() {
     const solToQuery = Math.ceil(Math.random() * 3314);
@@ -50,13 +49,13 @@ function initPictures () {
     const pictureData = fetch(filterBySolEndpoint)
     .then(res => res.json())
     .then(data => {
-        // console.log(data.photos)
+        if (data.photos.length >= 1) {
         const howManyPhotos = data.photos.length;
         function getRandomNumberPic () {
             const num = Math.ceil(Math.random() * howManyPhotos);
             return num;
         }
-
+     
         const photoToShow1 = data.photos[getRandomNumberPic()];
         const photoToShow2 = data.photos[getRandomNumberPic()];
         const photoToShow3 = data.photos[getRandomNumberPic()];
@@ -67,6 +66,7 @@ function initPictures () {
         image2.src = photoToShow2.img_src;
         image3.src = photoToShow3.img_src;
         imageContainer.append(image1, image2, image3);
+    }
     })
     return pictureData;
 }
@@ -84,8 +84,11 @@ function initWeather () {
         seasonSpan.innerText = solObject.season;
         earthDateSpan.innerText = earthDate.toDateString();
         conditionsSpan.innerText = solObject.atmo_opacity;
-        hiTempSpan.innerText = solObject.max_temp;
-        lowTempSpan.innerText = solObject.min_temp;
+        // const hi = hiTempSpan.innerText;
+        // const lo = lowTempSpan.innerText;
+        hiTempSpan.innerText = solObject.max_temp + ` degrees C`;
+        lowTempSpan.innerText = solObject.min_temp + ` degrees C`;
+
         sunriseSpan.innerText = solObject.sunrise;
         sunsetSpan.innerText = solObject.sunset;
         uvSpan.innerText = solObject.local_uv_irradiance_index;
@@ -93,18 +96,45 @@ function initWeather () {
         humiditySpan.innerText = solObject.abs_humidity || 'not currently available';
         windSpan.innerText = solObject.wind_speed || 'not currently available';
         
+        toggleButton.addEventListener('click', (e) => {
+            console.log(e);
+            cOrF();
+        });
 
-        function clothingRecs() {
-            if (solObject.atmo_opacity === 'Sunny' || 'sunny') {
-                const recs = weatherObj.sunny.recommendations;
-                console.log(recs);
-
+        function cOrF() {
+        let isCelsius = hiTempSpan.innerText.includes(` degrees C`);
+        let isFahrenheit = hiTempSpan.innerText.includes(` degrees F`);
+        const lowDegreesF = Math.round(convertCToF(solObject.max_temp));
+        const hiDegreesF = Math.round(convertCToF(solObject.min_temp));
+            if(isCelsius) {
+                hiTempSpan.innerText = hiDegreesF + ` degrees F`;
+                lowTempSpan.innerText =  lowDegreesF + ` degrees F`;
+            } else if (isFahrenheit) {
+                hiTempSpan.innerText = Math.round(convertFToC(hiDegreesF)) + ` degrees C`;
+                lowTempSpan.innerText = Math.round(convertFToC(lowDegreesF)) + ` degrees C`;
             }
-       }
-       clothingRecs();
-    })
+        }
+    //     function clothingRecs() {
+    //         if (solObject.atmo_opacity === 'Sunny' || 'sunny') {
+    //             const recs = weatherObj.sunny.recommendations;
 
-   
+    //         }
+    //    }
+    //    clothingRecs();
+    // }
+    })
+}
+
+function convertCToF (celsius) {
+    const cTemp = celsius;
+    const cToFahr = cTemp * 9 / 5 + 32;
+    return cToFahr;
+}
+
+function convertFToC (fahrenheit) {
+    const fTemp = fahrenheit;
+    const fToCel = (fTemp - 32) * 5 / 9;
+    return fToCel;
 }
 
 // need to format display time for sunrise and sunset
@@ -116,14 +146,15 @@ function initWeather () {
 function timeOfDay () {
     const now = new Date ();
     const currentHour = now.getHours();
+    console.log(currentHour)
     const body = document.getElementById('body');
-    if (currentHour < 6 || currentHour > 19) {
+    if (currentHour < 6 || currentHour >= 19) {
         body.style.backgroundColor = '#191970';
-    } else if (currentHour > 6 && currentHour < 8) {
+    } else if (currentHour >= 6 && currentHour < 9) {
         body.style.backgroundColor = '#FFA07A';
-    } else if (currentHour > 8 && currentHour < 17) {
+    } else if (currentHour >= 9 && currentHour < 17) {
         body.style.backgroundColor = '#FAFAD2';
-    } else if (currentHour > 17 && currentHour < 19) {
+    } else if (currentHour >= 17 && currentHour < 19) {
         body.style.backgroundColor = '#87CEFA';
     }
 }
@@ -151,14 +182,6 @@ const weatherObj = {
         }
 }
 
-
-
-// define a function that converts celsius to farenheit
-
-function convertCToF (degreesInC) {
-   
-
-}
 
 // define a function that pops up a modal of information when clothing recommendation is clicked
 // define an object with all possible weather conditions outcomes and 
