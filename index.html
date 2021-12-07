@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mars-weather-app</title>
     <link rel="stylesheet" href="./styles.css">
+    <script src="https://kit.fontawesome.com/7a23b940c0.js" crossorigin="anonymous"></script>
     <script defer src="index.js" charset="utf-8"></script>
 </head>
 
@@ -13,17 +14,18 @@
     <header>
         <h4 id="title">mars-weather-app</h4>
     </header>
-    <h1 id="logo">mars</h1>
+    <h1 id="logo">mars <i class="fas fa-user-astronaut"></i></h1>
+    
 
     <div id="sol-container">
+        <h4>SOL: <span id="sol-number"></span></h4>
+        <h4>SEASON: <span id="szn-number"></span></h4>
+        <h4>DATE ON EARTH: <span id="earth-date"></span></h4>
         <form id='sol-search'>
             <input type="text" placeholder="Search for a Sol" autofocus>
             <button type="submit">SUBMIT </button>
             <span class="msg"></span>
           </form>
-        <h4>SOL: <span id="sol-number"></span></h4>
-        <h4>SEASON: <span id="szn-number"></span></h4>
-        <h4>DATE ON EARTH: <span id="earth-date"></span></h4>
     </div>
 
     <div id="image-container">
@@ -31,34 +33,35 @@
     </div>
 
     <div id="conditions-container">
-        <h4>CONDITIONS: <span id="conditions"></span></h4>
+        <h4>CONDITIONS: <span id="conditions"></span> <i class="fas fa-sun"></i></h4>
         <button id="clothing-recs">get recommendations!</button>
     </div>
     <div id="recs-modal" class="modal-outer-2">
         <div class="modal-inner-2">
+            <h4>MARS-WEATHER-APP Recommends:</h4>
             <p id="recs"></p>
         </div>
     </div>
     <div id="container">
     <div id="temperature-container">
-        <h4>HIGH TEMP: <span id="hi-temp"></span></h4>
-        <h4>LOW TEMP: <span id="low-temp"></span></h4>
+        <h4>HIGH TEMP: <span id="hi-temp"></span>  <i class="fas fa-temperature-high"></i></h4>
+        <h4>LOW TEMP: <span id="low-temp"></span> <i class="fas fa-temperature-low"></i></h4>
         <button id="toggle-temp">toggle f/c</button>
     </div>
 
     <div id="sun-container">
         <h4>SUNRISE: <span id="sunrise"></span></h4>
-        <h4>SUNSET: <span id="sunset"></span></h4>
+        <h4>SUNSET: <span id="sunset"></span> <i class="far fa-moon"></i></h4>
         <button id="view-more">view <span id="more-or-less">more</span> weather info</button>
     </div>
     </div>
     <div id="xt-info-modal" class="modal-outer">
         <div class ="modal-inner">
         <h4>MORE WEATHER INFO:</h4>
-        <p>UV Irradiance: <span id="uv"></span></p>
+        <p>UV Irradiance: <span id="uv"></span> <i class="far fa-sun"></i></p>
         <p>Pressure: <span id="pressure"></span></p>
         <p>Humidity: <span id="humidity"></span></p>
-        <p>Wind Speed: <span id="wind"></span></p>
+        <p>Wind Speed: <span id="wind"></span> <i class="fas fa-wind"></i></p>
         </div>
     </div>
     <footer>

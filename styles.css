@@ -166,7 +166,7 @@ button {
 }
 
 #body {
-    background-image: "images/daytime.png";
+  background-image: "images/daytime.png";
 }
 
 .night {
@@ -183,4 +183,12 @@ button {
 
 .afternoon {
   background-image: "images/afternoon.png";
+}
+
+form {
+  text-align: center;
+}
+
+h1 i {
+  font-size: 3rem;
 }
