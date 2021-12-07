@@ -1,10 +1,10 @@
+// api information
 const weatherEndpoint = 'https://api.maas2.apollorion.com/';
-
 let sol = getRandomSol();
 const pictureAPIKey = 'cO4ZKLydH6VHd21eDz3InRVoJISzRK6UQBTflnD9';
 const filterBySolEndpoint = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=${sol}camera=PANCAM&api_key=${pictureAPIKey}`;
 
-// html elements to grab
+// html elements
 const solSpan = document.getElementById('sol-number');
 const seasonSpan = document.getElementById('szn-number');
 const earthDateSpan = document.getElementById('earth-date');
@@ -30,64 +30,10 @@ const modalOuter2 = document.querySelector('.modal-outer-2');
 // event listeners
 document.addEventListener('DOMContentLoaded', initPictures);
 document.addEventListener('DOMContentLoaded', initWeather);
-// viewMoreButton.addEventListener('click', () => {
-//     const moreOrLess = document.getElementById('more-or-less');
-//     infoModal.classList.toggle('hidden');
-//        if (moreOrLess.innerText === 'more') {
-//            moreOrLess.innerText = 'less';
-//        } else if (moreOrLess.innerText === 'less') {
-//            moreOrLess.innerText = 'more';
-//        }
-// });
 
-// add event listener for click on clothing recs
-clothingButton.addEventListener('click', () => {
-    modalOuter2.classList.add('open-2');
-});
-
-modalOuter2.addEventListener('click', function(event) {
-    const isOutside = !event.target.closest('.modal-inner-2');
-    if (isOutside) {
-      closeModal2();
-    }
-  });
-
-window.addEventListener('keydown', event => {
-    console.log(event);
-    if (event.key === 'Escape') {
-      closeModal2();
-    }
-  });
-
-function closeModal2() {
-    modalOuter2.classList.remove('open-2');
-  }
-
-
-
-viewMoreButton.addEventListener('click', () => {
-    modalOuter.classList.add('open');
-});
-
-modalOuter.addEventListener('click', function(event) {
-    const isOutside = !event.target.closest('.modal-inner');
-    if (isOutside) {
-      closeModal();
-    }
-  });
-
-window.addEventListener('keydown', event => {
-    console.log(event);
-    if (event.key === 'Escape') {
-      closeModal();
-    }
-  });
-
-function closeModal() {
-    modalOuter.classList.remove('open');
-  }
 // add event listener for search and function
 
+// initialize pictures
 function getRandomSol() {
     const solToQuery = Math.ceil(Math.random() * 3314);
     return solToQuery;
@@ -119,7 +65,7 @@ function initPictures () {
     return pictureData;
 }
 
-
+// initialize weather
 function initWeather () {
     fetch(weatherEndpoint)
     .then(res => res.json())
@@ -132,8 +78,6 @@ function initWeather () {
         seasonSpan.innerText = solObject.season;
         earthDateSpan.innerText = earthDate.toDateString();
         conditionsSpan.innerText = solObject.atmo_opacity;
-        // const hi = hiTempSpan.innerText;
-        // const lo = lowTempSpan.innerText;
         hiTempSpan.innerText = solObject.max_temp + ` degrees C`;
         lowTempSpan.innerText = solObject.min_temp + ` degrees C`;
 
@@ -148,7 +92,7 @@ function initWeather () {
             cOrF();
         });
 
-        function cOrF() {
+      function cOrF() {
         let isCelsius = hiTempSpan.innerText.includes(` degrees C`);
         let isFahrenheit = hiTempSpan.innerText.includes(` degrees F`);
         const lowDegreesF = Math.round(convertCToF(solObject.max_temp));
@@ -172,6 +116,7 @@ function initWeather () {
     })
 }
 
+// temperature conversion functions
 function convertCToF (celsius) {
     const cTemp = celsius;
     const cToFahr = cTemp * 9 / 5 + 32;
@@ -184,12 +129,54 @@ function convertFToC (fahrenheit) {
     return fToCel;
 }
 
+// MODAL functions and event handlers
+clothingButton.addEventListener('click', () => {
+    modalOuter2.classList.add('open-2');
+});
+
+modalOuter2.addEventListener('click', function(event) {
+    const isOutside = !event.target.closest('.modal-inner-2');
+    if (isOutside) {
+      closeModal2();
+    }
+  });
+
+window.addEventListener('keydown', event => {
+    console.log(event);
+    if (event.key === 'Escape') {
+      closeModal2();
+    }
+  });
+
+function closeModal2() {
+    modalOuter2.classList.remove('open-2');
+}
+
+viewMoreButton.addEventListener('click', () => {
+    modalOuter.classList.add('open');
+});
+
+modalOuter.addEventListener('click', function(event) {
+    const isOutside = !event.target.closest('.modal-inner');
+    if (isOutside) {
+      closeModal();
+    }
+});
+
+window.addEventListener('keydown', event => {
+    console.log(event);
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+});
+
+function closeModal() {
+    modalOuter.classList.remove('open');
+}
+
 // need to format display time for sunrise and sunset
 
-// replace colors with proper backgrounds
-// possibly do it as add classlist and make css classes
-// that match each time of day
-
+// function for changing background for time of day
 function timeOfDay () {
     const now = new Date ();
     const currentHour = now.getHours();
@@ -205,6 +192,10 @@ function timeOfDay () {
     }
 }
 timeOfDay();
+
+// replace colors with proper backgrounds
+// possibly do it as add classlist and make css classes
+// that match each time of day
 
 const weatherObj = {
         sunny: {
@@ -227,10 +218,3 @@ const weatherObj = {
             }
         }
 }
-
-
-// define a function that pops up a modal of information when clothing recommendation is clicked
-// define an object with all possible weather conditions outcomes and 
-// corresponding recommendations
-
-// define a function that can fetch any previous sol and then populate app with data
