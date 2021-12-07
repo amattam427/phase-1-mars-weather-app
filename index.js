@@ -25,6 +25,7 @@ const infoModal = document.getElementById('xt-info-modal');
 const recsModal = document.getElementById('recs-modal');
 const modalOuter = document.querySelector('.modal-outer');
 const modalOuter2 = document.querySelector('.modal-outer-2');
+const recsP = document.getElementById('recs');
 
 
 // event listeners
@@ -78,8 +79,8 @@ function initWeather () {
         seasonSpan.innerText = solObject.season;
         earthDateSpan.innerText = earthDate.toDateString();
         conditionsSpan.innerText = solObject.atmo_opacity;
-        hiTempSpan.innerText = solObject.max_temp + ` degrees C`;
-        lowTempSpan.innerText = solObject.min_temp + ` degrees C`;
+        hiTempSpan.innerText = solObject.max_temp + `\xB0` + `C`;
+        lowTempSpan.innerText = solObject.min_temp + `\xB0` + `C`;
 
         sunriseSpan.innerText = solObject.sunrise;
         sunsetSpan.innerText = solObject.sunset;
@@ -93,26 +94,31 @@ function initWeather () {
         });
 
       function cOrF() {
-        let isCelsius = hiTempSpan.innerText.includes(` degrees C`);
-        let isFahrenheit = hiTempSpan.innerText.includes(` degrees F`);
+        let isCelsius = hiTempSpan.innerText.includes(`\xB0` + `C`);
+        let isFahrenheit = hiTempSpan.innerText.includes(`\xB0` + `F`);
         const lowDegreesF = Math.round(convertCToF(solObject.max_temp));
         const hiDegreesF = Math.round(convertCToF(solObject.min_temp));
             if(isCelsius) {
-                hiTempSpan.innerText = hiDegreesF + ` degrees F`;
-                lowTempSpan.innerText =  lowDegreesF + ` degrees F`;
+                hiTempSpan.innerText = hiDegreesF + `\xB0` + `F`;
+                lowTempSpan.innerText =  lowDegreesF + `\xB0` + `F`;
             } else if (isFahrenheit) {
-                hiTempSpan.innerText = Math.round(convertFToC(hiDegreesF)) + ` degrees C`;
-                lowTempSpan.innerText = Math.round(convertFToC(lowDegreesF)) + ` degrees C`;
+                hiTempSpan.innerText = Math.round(convertFToC(hiDegreesF)) + `\xB0` + `C`;
+                lowTempSpan.innerText = Math.round(convertFToC(lowDegreesF)) + `\xB0` + `C`;
             }
         }
-    //     function clothingRecs() {
-    //         if (solObject.atmo_opacity === 'Sunny' || 'sunny') {
-    //             const recs = weatherObj.sunny.recommendations;
+        function clothingRecs() {
+            const conditionToCheck = solObject.atmo_opacity;
+            console.log(conditionToCheck)
+            // if (solObject.atmo_opacity === 'Sunny' || 'sunny'){
+                const recommendations = weatherObj.sunny.recommendations;
 
-    //         }
-    //    }
-    //    clothingRecs();
-    // }
+                recommendations.forEach(rec => {
+                    const p = document.createElement('p');
+                    p.innerText = rec;
+                    recsP.append(p);
+                })   
+       }
+       clothingRecs();
     })
 }
 
@@ -185,9 +191,9 @@ function timeOfDay () {
         body.style.backgroundColor = '#191970';
     } else if (currentHour >= 6 && currentHour < 9) {
         body.style.backgroundColor = '#FFA07A';
-    } else if (currentHour >= 9 && currentHour < 17) {
-        body.style.backgroundColor = '#FAFAD2';
-    } else if (currentHour >= 17 && currentHour < 19) {
+    } else if (currentHour >= 9 && currentHour < 16) {
+        body.style.backgroundColor = `#FAFAD2`;
+    } else if (currentHour >= 16 && currentHour < 19) {
         body.style.backgroundColor = '#87CEFA';
     }
 }
@@ -199,22 +205,15 @@ timeOfDay();
 
 const weatherObj = {
         sunny: {
-            recommendations: {
-                1: `Don't forget your sunscreen!`,
-                2: `Wear a hat for protection!`,
-                3: `Drink lots of water today!`
-            }
+            recommendations: 
+            [`Don't forget your sunscreen!`, `Wear a hat for protection!`, `Drink lots of water today!`]
         },
         cloudy: {
-            recommendations: {
-                1: `Bring an umbrella in case it rains!`,
-                2: `Dont forget you can still get a sunburn through the clouds!`
-            }
+            recommendations: 
+                [`Bring an umbrella in case it rains!`, `Dont forget you can still get a sunburn through the clouds!`, `Wear a light jacket in case it's chilly!`] 
         },
         rainy: {
-            recommendations: {
-                1: `Bring an umbrella!`,
-                2: `Wear your rainboots!`
-            }
+            recommendations: 
+                [`Bring an umbrella!`, `Wear your rainboots!`, `Don't forget a rain jacket.`]
         }
 }
