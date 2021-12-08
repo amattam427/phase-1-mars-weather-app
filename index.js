@@ -35,7 +35,6 @@ const textInput = document.getElementById('user-input');
 document.addEventListener('DOMContentLoaded', initPictures);
 document.addEventListener('DOMContentLoaded', initWeather(weatherEndpoint));
 
-// add event listener for search and function
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const query = parseInt(textInput.value);
@@ -85,14 +84,15 @@ function initWeather (urlToFetch) {
             }
         }
         function clothingRecs() {
-            const conditionToCheck = solObject.atmo_opacity;
-            // if (conditionToCheck === 'Sunny' || 'sunny'){
             const recommendations = weatherObj.sunny.recommendations;
-            
             recommendations.forEach(rec => {
-                    const p = document.createElement('p');
-                    p.innerText = rec;
-                    recsP.append(p);
+                    
+                    // const existingRec = document.querySelector('#recs p');
+                    // console.log(existingRec)
+                
+                const p = document.createElement('p');
+                p.innerText = rec;
+                recsP.append(p);
             })   
         }
         clothingRecs();
@@ -101,12 +101,11 @@ function initWeather (urlToFetch) {
     
 }
 
-    // initialize pictures
+// initialize pictures
 function getRandomSol() {
     const solToQuery = Math.ceil(Math.random() * 3314);
     return solToQuery;
 }
-
 
 function initPictures () {
     const pictureData = fetch(filterBySolEndpoint)
@@ -118,17 +117,16 @@ function initPictures () {
                 const num = Math.ceil(Math.random() * howManyPhotos);
                 return num;
             }
-         
-        const photoToShow1 = data.photos[getRandomNumberPic()];
-        const photoToShow2 = data.photos[getRandomNumberPic()];
-        const photoToShow3 = data.photos[getRandomNumberPic()];
-        const image1 = document.createElement('img');
-        const image2 = document.createElement('img');
-        const image3 = document.createElement('img');
-        image1.src = photoToShow1.img_src;
-        image2.src = photoToShow2.img_src;
-        image3.src = photoToShow3.img_src;
-        imageContainer.append(image1, image2, image3);
+            const photoToShow1 = data.photos[getRandomNumberPic()];
+            const photoToShow2 = data.photos[getRandomNumberPic()];
+            const photoToShow3 = data.photos[getRandomNumberPic()];
+            const image1 = document.createElement('img');
+            const image2 = document.createElement('img');
+            const image3 = document.createElement('img');
+            image1.src = photoToShow1.img_src;
+            image2.src = photoToShow2.img_src;
+            image3.src = photoToShow3.img_src;
+            imageContainer.append(image1, image2, image3);
         }
     })
     return pictureData;
@@ -208,10 +206,7 @@ function timeOfDay () {
 }
 timeOfDay();
 
-// replace colors with proper backgrounds
-// possibly do it as add classlist and make css classes
-// that match each time of day
-
+// weather recs object
 const weatherObj = {
     sunny: {
         recommendations: 
@@ -226,3 +221,9 @@ const weatherObj = {
             [`Bring an umbrella!`, `Wear your rainboots!`, `Don't forget a rain jacket.`]
     }
 }
+
+
+// TO DO:
+// fix toggle temp for searched sol
+// fix rec popups to not repeat if already there
+// error handling for sol search that doesnt exist
