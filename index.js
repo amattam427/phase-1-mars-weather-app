@@ -48,6 +48,7 @@ function initWeather (urlToFetch) {
     fetch(urlToFetch)
     .then(res => res.json())
     .then(solObject => {
+        
         // here we will populate weather info
         const terrestrial = solObject.terrestrial_date;
         const earthDate = new Date(terrestrial);
@@ -73,8 +74,8 @@ function initWeather (urlToFetch) {
         function cOrF() {
             let isCelsius = hiTempSpan.innerText.includes(`\xB0` + `C`);
             let isFahrenheit = hiTempSpan.innerText.includes(`\xB0` + `F`);
-            const lowDegreesF = Math.round(convertCToF(solObject.min_temp));
-            const hiDegreesF = Math.round(convertCToF(solObject.max_temp));
+            let lowDegreesF = Math.round(convertCToF(solObject.min_temp));
+            let hiDegreesF = Math.round(convertCToF(solObject.max_temp));
             if(isCelsius) {
                 hiTempSpan.innerText = hiDegreesF + `\xB0` + `F`;
                 lowTempSpan.innerText =  lowDegreesF + `\xB0` + `F`;
@@ -85,18 +86,19 @@ function initWeather (urlToFetch) {
         }
         function clothingRecs() {
             const conditionToCheck = solObject.atmo_opacity;
-            console.log(conditionToCheck)
-            // if (solObject.atmo_opacity === 'Sunny' || 'sunny'){
+            // if (conditionToCheck === 'Sunny' || 'sunny'){
             const recommendations = weatherObj.sunny.recommendations;
-
+            
             recommendations.forEach(rec => {
-                const p = document.createElement('p');
-                p.innerText = rec;
-                recsP.append(p);
+                    const p = document.createElement('p');
+                    p.innerText = rec;
+                    recsP.append(p);
             })   
         }
         clothingRecs();
+    
     })
+    
 }
 
     // initialize pictures
@@ -194,13 +196,14 @@ function timeOfDay () {
     const currentHour = now.getHours();
     const body = document.getElementById('body');
     if (currentHour < 6 || currentHour >= 19) {
-        body.style.backgroundColor = '#191970';
+        body.style.backgroundImage = `url('./images/night.png')`;
+        body.style.color = 'white';
     } else if (currentHour >= 6 && currentHour < 9) {
-        body.style.backgroundColor = '#FFA07A';
+        body.style.backgroundImage = `url('./images/earlymorning.png')`;
     } else if (currentHour >= 9 && currentHour < 16) {
-        body.style.backgroundColor = `#FAFAD2`;
+        body.style.backgroundImage = `url('./images/daytime.png')`;
     } else if (currentHour >= 16 && currentHour < 19) {
-        body.style.backgroundColor = '#87CEFA';
+        body.style.backgroundImage = `url('./images/afternoon.png')`;
     }
 }
 timeOfDay();

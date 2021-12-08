@@ -6,6 +6,12 @@
   font-family: "Montserrat", sans-serif;
 }
 
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("./images/night.png");
+}
+
 h1 {
   font-size: 5rem;
   font-family: "Rock Salt", cursive;
