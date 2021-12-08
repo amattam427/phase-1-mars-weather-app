@@ -27,13 +27,31 @@ const modalOuter = document.querySelector('.modal-outer');
 const modalOuter2 = document.querySelector('.modal-outer-2');
 const recsP = document.getElementById('recs');
 
+const form = document.getElementById('sol-search');
+const dataList = document.getElementById('sol-container')
+const textInput = document.getElementById('user-input');
+
 
 // event listeners
 document.addEventListener('DOMContentLoaded', initPictures);
 document.addEventListener('DOMContentLoaded', initWeather);
 
 // add event listener for search and function
-
+form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const query = parseInt(textInput.value);
+    fetchPreviousSol(query);
+})
+function fetchPreviousSol(query){
+    const fetchSol = `https://api.maas2.apollorion.com/${query}`;
+    fetch(fetchSol)
+    .then(res=>res.json())
+    .then(solObj=>{
+        //get matches to current text input
+       console.log(solObj);
+       console.log('hello')
+    })
+}
 // initialize pictures
 function getRandomSol() {
     const solToQuery = Math.ceil(Math.random() * 3314);
@@ -148,7 +166,6 @@ modalOuter2.addEventListener('click', function(event) {
   });
 
 window.addEventListener('keydown', event => {
-    console.log(event);
     if (event.key === 'Escape') {
       closeModal2();
     }
@@ -170,7 +187,6 @@ modalOuter.addEventListener('click', function(event) {
 });
 
 window.addEventListener('keydown', event => {
-    console.log(event);
     if (event.key === 'Escape') {
       closeModal();
     }
@@ -197,7 +213,7 @@ function timeOfDay () {
         body.style.backgroundColor = '#87CEFA';
     }
 }
-timeOfDay();
+// timeOfDay();
 
 // replace colors with proper backgrounds
 // possibly do it as add classlist and make css classes
