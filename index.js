@@ -28,7 +28,6 @@ const modalOuter2 = document.querySelector('.modal-outer-2');
 const recsP = document.getElementById('recs');
 
 const form = document.getElementById('sol-search');
-const dataList = document.getElementById('sol-container')
 const textInput = document.getElementById('user-input');
 
 
@@ -37,7 +36,7 @@ document.addEventListener('DOMContentLoaded', initPictures);
 document.addEventListener('DOMContentLoaded', initWeather);
 
 // add event listener for search and function
-form.addEventListener('submit', (e)=>{
+form.addEventListener('submit', (e) => {
     e.preventDefault();
     const query = parseInt(textInput.value);
     fetchPreviousSol(query);
@@ -46,42 +45,9 @@ function fetchPreviousSol(query){
     const fetchSol = `https://api.maas2.apollorion.com/${query}`;
     fetch(fetchSol)
     .then(res=>res.json())
-    .then(solObj=>{
-        //get matches to current text input
-       console.log(solObj);
-       console.log('hello')
-    })
-}
-// initialize pictures
-function getRandomSol() {
-    const solToQuery = Math.ceil(Math.random() * 3314);
-    return solToQuery;
-}
-
-function initPictures () {
-    const pictureData = fetch(filterBySolEndpoint)
-    .then(res => res.json())
-    .then(data => {
-        if (data.photos.length >= 3) {
-        const howManyPhotos = data.photos.length;
-        function getRandomNumberPic () {
-            const num = Math.ceil(Math.random() * howManyPhotos);
-            return num;
-        }
-     
-        const photoToShow1 = data.photos[getRandomNumberPic()];
-        const photoToShow2 = data.photos[getRandomNumberPic()];
-        const photoToShow3 = data.photos[getRandomNumberPic()];
-        const image1 = document.createElement('img');
-        const image2 = document.createElement('img');
-        const image3 = document.createElement('img');
-        image1.src = photoToShow1.img_src;
-        image2.src = photoToShow2.img_src;
-        image3.src = photoToShow3.img_src;
-        imageContainer.append(image1, image2, image3);
-    }
-    })
-    return pictureData;
+    .then(solObject => {
+      console.log(solObject);
+    });
 }
 
 // initialize weather
@@ -111,11 +77,11 @@ function initWeather () {
             cOrF();
         });
 
-      function cOrF() {
-        let isCelsius = hiTempSpan.innerText.includes(`\xB0` + `C`);
-        let isFahrenheit = hiTempSpan.innerText.includes(`\xB0` + `F`);
-        const lowDegreesF = Math.round(convertCToF(solObject.min_temp));
-        const hiDegreesF = Math.round(convertCToF(solObject.max_temp));
+        function cOrF() {
+            let isCelsius = hiTempSpan.innerText.includes(`\xB0` + `C`);
+            let isFahrenheit = hiTempSpan.innerText.includes(`\xB0` + `F`);
+            const lowDegreesF = Math.round(convertCToF(solObject.min_temp));
+            const hiDegreesF = Math.round(convertCToF(solObject.max_temp));
             if(isCelsius) {
                 hiTempSpan.innerText = hiDegreesF + `\xB0` + `F`;
                 lowTempSpan.innerText =  lowDegreesF + `\xB0` + `F`;
@@ -128,16 +94,49 @@ function initWeather () {
             const conditionToCheck = solObject.atmo_opacity;
             console.log(conditionToCheck)
             // if (solObject.atmo_opacity === 'Sunny' || 'sunny'){
-                const recommendations = weatherObj.sunny.recommendations;
+            const recommendations = weatherObj.sunny.recommendations;
 
-                recommendations.forEach(rec => {
-                    const p = document.createElement('p');
-                    p.innerText = rec;
-                    recsP.append(p);
-                })   
-       }
-       clothingRecs();
+            recommendations.forEach(rec => {
+                const p = document.createElement('p');
+                p.innerText = rec;
+                recsP.append(p);
+            })   
+        }
+        clothingRecs();
     })
+}
+
+    // initialize pictures
+function getRandomSol() {
+    const solToQuery = Math.ceil(Math.random() * 3314);
+    return solToQuery;
+}
+
+
+function initPictures () {
+    const pictureData = fetch(filterBySolEndpoint)
+    .then(res => res.json())
+    .then(data => {
+        if (data.photos.length >= 3) {
+            const howManyPhotos = data.photos.length;
+            function getRandomNumberPic () {
+                const num = Math.ceil(Math.random() * howManyPhotos);
+                return num;
+            }
+         
+        const photoToShow1 = data.photos[getRandomNumberPic()];
+        const photoToShow2 = data.photos[getRandomNumberPic()];
+        const photoToShow3 = data.photos[getRandomNumberPic()];
+        const image1 = document.createElement('img');
+        const image2 = document.createElement('img');
+        const image3 = document.createElement('img');
+        image1.src = photoToShow1.img_src;
+        image2.src = photoToShow2.img_src;
+        image3.src = photoToShow3.img_src;
+        imageContainer.append(image1, image2, image3);
+        }
+    })
+    return pictureData;
 }
 
 // temperature conversion functions
@@ -196,8 +195,6 @@ function closeModal() {
     modalOuter.classList.remove('open');
 }
 
-// need to format display time for sunrise and sunset
-
 // function for changing background for time of day
 function timeOfDay () {
     const now = new Date ();
@@ -213,23 +210,23 @@ function timeOfDay () {
         body.style.backgroundColor = '#87CEFA';
     }
 }
-// timeOfDay();
+timeOfDay();
 
 // replace colors with proper backgrounds
 // possibly do it as add classlist and make css classes
 // that match each time of day
 
 const weatherObj = {
-        sunny: {
-            recommendations: 
+    sunny: {
+        recommendations: 
             [`Don't forget your sunscreen!`, `Wear a hat for protection!`, `Drink lots of water today!`]
-        },
-        cloudy: {
-            recommendations: 
-                [`Bring an umbrella in case it rains!`, `Dont forget you can still get a sunburn through the clouds!`, `Wear a light jacket in case it's chilly!`] 
-        },
-        rainy: {
-            recommendations: 
-                [`Bring an umbrella!`, `Wear your rainboots!`, `Don't forget a rain jacket.`]
-        }
+    },
+    cloudy: {
+        recommendations: 
+            [`Bring an umbrella in case it rains!`, `Dont forget you can still get a sunburn through the clouds!`, `Wear a light jacket in case it's chilly!`] 
+    },
+    rainy: {
+        recommendations: 
+            [`Bring an umbrella!`, `Wear your rainboots!`, `Don't forget a rain jacket.`]
+    }
 }
