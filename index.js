@@ -96,8 +96,8 @@ function initWeather () {
       function cOrF() {
         let isCelsius = hiTempSpan.innerText.includes(`\xB0` + `C`);
         let isFahrenheit = hiTempSpan.innerText.includes(`\xB0` + `F`);
-        const lowDegreesF = Math.round(convertCToF(solObject.max_temp));
-        const hiDegreesF = Math.round(convertCToF(solObject.min_temp));
+        const lowDegreesF = Math.round(convertCToF(solObject.min_temp));
+        const hiDegreesF = Math.round(convertCToF(solObject.max_temp));
             if(isCelsius) {
                 hiTempSpan.innerText = hiDegreesF + `\xB0` + `F`;
                 lowTempSpan.innerText =  lowDegreesF + `\xB0` + `F`;
