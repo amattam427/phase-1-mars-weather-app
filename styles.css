@@ -10,6 +10,11 @@ h1 {
   font-size: 5rem;
   font-family: "Rock Salt", cursive;
   color: black;
+  margin: 0px;
+}
+
+h6 {
+  margin: 0px;
 }
 
 h3 {
@@ -30,12 +35,12 @@ p {
 }
 
 header {
-  background-color: black;
+  display: block;
+  font-size: 0px;
 }
 
 #title {
   text-align: center;
-  color: white;
 }
 
 #logo {
@@ -54,27 +59,73 @@ img {
 }
 
 #sol-container {
-  border: 2px solid black;
   padding: 20px;
+  margin: 50px;
 }
 
 #sol-container > h4 {
   text-align: center;
+  margin: 10px;
+}
+
+#date {
+  font-size: 1rem;
+}
+
+#earth-date {
+  font-size: 1rem;
+}
+
+#sol-number,
+#szn-number {
+  font-size: 2rem;
+}
+
+#sol-search {
+  margin: 20px;
 }
 
 #temperature-container {
-  border: 2px solid black;
   flex-basis: 1;
+  margin: 20px;
+}
+
+#temperature-container span {
+  font-size: 1.5rem;
+}
+
+#temperature-container h4 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+#toggle-temp {
+  text-align: center;
 }
 
 #sun-container {
-  border: 2px solid black;
   flex-basis: 1;
+  margin: 20px;
+}
+
+#sun-container > h4 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+#sunrise,
+#sunset {
+  font-size: 1.5rem;
 }
 
 #container {
   display: flex;
   justify-content: space-evenly;
+  text-align: center;
+}
+
+#conditions-container span {
+  font-size: 2rem;
 }
 
 #image-container {
@@ -83,19 +134,36 @@ img {
 }
 
 #conditions-container {
-  border: 2px solid black;
   text-align: center;
+  margin: 50px;
+}
+
+#conditions-h4 {
+  margin: 10px;
 }
 
 button {
   border-radius: 10px;
-  background-color: goldenrod;
-  border: 1px solid black;
+  background-color: white;
+  border: 3px solid black;
+  font-size: 1rem;
+}
+
+form {
+  text-align: center;
+}
+
+h1 i {
+  font-size: 5rem;
+}
+
+i {
+  font-size: 2rem;
 }
 
 .modal-outer {
   display: grid;
-  background: hsla(50, 100%, 50%, 0.7);
+  background: hsla(0, 0%, 100%, 0.7);
   position: fixed;
   height: 100vh;
   width: 100vw;
@@ -131,7 +199,7 @@ button {
 
 .modal-outer-2 {
   display: grid;
-  background: hsla(50, 100%, 50%, 0.7);
+  background: hsla(0, 0%, 100%, 0.7);
   position: fixed;
   height: 100vh;
   width: 100vw;
@@ -165,10 +233,6 @@ button {
   transform: translateY(0);
 }
 
-#body {
-  background-image: "images/daytime.png";
-}
-
 .night {
   background-image: "images/night.png";
 }
@@ -183,12 +247,4 @@ button {
 
 .afternoon {
   background-image: "images/afternoon.png";
-}
-
-form {
-  text-align: center;
-}
-
-h1 i {
-  font-size: 3rem;
 }

@@ -12,15 +12,14 @@
 
 <body id="body">
     <header>
-        <h4 id="title">mars-weather-app</h4>
-    </header>
     <h1 id="logo">mars <i class="fas fa-user-astronaut"></i></h1>
-    
+    <h6 id="title">THE weather app</h6>
+    </header>
 
     <div id="sol-container">
         <h4>SOL: <span id="sol-number"></span></h4>
         <h4>SEASON: <span id="szn-number"></span></h4>
-        <h4>DATE ON EARTH: <span id="earth-date"></span></h4>
+        <h4 id="date">DATE ON EARTH: <span id="earth-date"></span></h4>
         <form id='sol-search'>
             <input type="text" placeholder="Search for a Sol" autofocus>
             <button type="submit">SUBMIT </button>
@@ -33,8 +32,8 @@
     </div>
 
     <div id="conditions-container">
-        <h4>CONDITIONS: <span id="conditions"></span> <i class="fas fa-sun"></i></h4>
-        <button id="clothing-recs">get recommendations!</button>
+        <h4 id="conditions-h4">CONDITIONS: <span id="conditions"></span> <i class="fas fa-sun"></i></h4>
+        <button id="clothing-recs">GET RECOMMENDATIONS</button>
     </div>
     <div id="recs-modal" class="modal-outer-2">
         <div class="modal-inner-2">
@@ -46,13 +45,13 @@
     <div id="temperature-container">
         <h4>HIGH TEMP: <span id="hi-temp"></span>  <i class="fas fa-temperature-high"></i></h4>
         <h4>LOW TEMP: <span id="low-temp"></span> <i class="fas fa-temperature-low"></i></h4>
-        <button id="toggle-temp">toggle f/c</button>
+        <button id="toggle-temp">TOGGLE C/F</button>
     </div>
 
     <div id="sun-container">
         <h4>SUNRISE: <span id="sunrise"></span> <i class="far fa-sun"></i></h4>
         <h4>SUNSET: <span id="sunset"></span> <i class="far fa-moon"></i></h4>
-        <button id="view-more">view <span id="more-or-less">more</span> weather info</button>
+        <button id="view-more">VIEW <span id="more-or-less">MORE</span> WEATHER INFO</button>
     </div>
     </div>
     <div id="xt-info-modal" class="modal-outer">
