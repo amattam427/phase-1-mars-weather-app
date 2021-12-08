@@ -33,26 +33,19 @@ const textInput = document.getElementById('user-input');
 
 // event listeners
 document.addEventListener('DOMContentLoaded', initPictures);
-document.addEventListener('DOMContentLoaded', initWeather);
+document.addEventListener('DOMContentLoaded', initWeather(weatherEndpoint));
 
 // add event listener for search and function
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const query = parseInt(textInput.value);
-    fetchPreviousSol(query);
+    const weatherEndpointSearched = `https://api.maas2.apollorion.com/${query}`;
+    initWeather(weatherEndpointSearched);
 })
-function fetchPreviousSol(query){
-    const fetchSol = `https://api.maas2.apollorion.com/${query}`;
-    fetch(fetchSol)
-    .then(res=>res.json())
-    .then(solObject => {
-      console.log(solObject);
-    });
-}
 
 // initialize weather
-function initWeather () {
-    fetch(weatherEndpoint)
+function initWeather (urlToFetch) {
+    fetch(urlToFetch)
     .then(res => res.json())
     .then(solObject => {
         // here we will populate weather info
