@@ -9,7 +9,6 @@
 body {
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url("./images/night.png");
 }
 
 h1 {
@@ -237,20 +236,4 @@ i {
 
 .modal-outer-2.open-2 .modal-inner-2 {
   transform: translateY(0);
-}
-
-.night {
-  background-image: "images/night.png";
-}
-
-.morning {
-  background-image: "images/earlymorning.png";
-}
-
-.day {
-  background-image: "images/daytime.png";
-}
-
-.afternoon {
-  background-image: "images/afternoon.png";
 }
