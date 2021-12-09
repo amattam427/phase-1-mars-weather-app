@@ -70,7 +70,7 @@ function init(urlToFetch) {
         setTimeout(() => {
             errorPopup.classList.remove('error');
             errorPopup.innerHTML = '';
-        }, 2000);
+        }, 4000);
         
     })
 }
@@ -245,9 +245,3 @@ function timeOfDay () {
     }
 }
 timeOfDay();
-
-
-
-// TO DO:
-// fix toggle temp for searched sol
-// error handling for sol search that doesnt exist
