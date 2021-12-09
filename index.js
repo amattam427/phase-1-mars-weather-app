@@ -48,7 +48,7 @@ toggleButton.addEventListener('click', () => {
 });
 
 // initialize weather
-let solObject;
+let solContainer = {};
 let isTrueOrFalse = true;
 
 function init(urlToFetch) {
@@ -65,13 +65,12 @@ function init(urlToFetch) {
     .catch(error => {
         console.log(error);
         const errorPopup = document.getElementById('error-msg');
-        
-            errorPopup.classList.add('error');
-            errorPopup.innerText = `Oops! That's not a valid sol.`;
-            setTimeout(() => {
-                errorPopup.classList.remove('error');
-                errorPopup.innerHTML = '';
-            }, 2000);
+        errorPopup.classList.add('error');
+        errorPopup.innerText = `Oops! That's not a valid sol.`;
+        setTimeout(() => {
+            errorPopup.classList.remove('error');
+            errorPopup.innerHTML = '';
+        }, 2000);
         
     })
 }
@@ -80,7 +79,7 @@ function displayData(url) {
     init(url)
     .then(dataFromFetch => {
         let solObject = dataFromFetch;
-        console.log(solObject);
+        solContainer = { ...solObject };
         const terrestrial = solObject.terrestrial_date;
         const earthDate = new Date(terrestrial);
         
@@ -100,9 +99,10 @@ function displayData(url) {
     });
 }
 
+
 function cOrF() {
-    let lowDegreesF = Math.round(convertCToF(solObject.min_temp));
-    let hiDegreesF = Math.round(convertCToF(solObject.max_temp));
+    let lowDegreesF = Math.round(convertCToF(solContainer.min_temp));
+    let hiDegreesF = Math.round(convertCToF(solContainer.max_temp));
     if(isTrueOrFalse) {
         isTrueOrFalse = !isTrueOrFalse;
         hiTempSpan.innerText = hiDegreesF + `\xB0` + `F`;
