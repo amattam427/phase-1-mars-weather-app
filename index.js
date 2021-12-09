@@ -33,73 +33,111 @@ const textInput = document.getElementById('user-input');
 
 // event listeners
 document.addEventListener('DOMContentLoaded', initPictures);
-document.addEventListener('DOMContentLoaded', initWeather(weatherEndpoint));
+document.addEventListener('DOMContentLoaded', displayData(weatherEndpoint));
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const query = parseInt(textInput.value);
     const weatherEndpointSearched = `https://api.maas2.apollorion.com/${query}`;
-    initWeather(weatherEndpointSearched);
+    displayData(weatherEndpointSearched);
+    textInput.value = '';
 })
 
+toggleButton.addEventListener('click', () => {
+    console.log('in event');
+    cOrF();
+});
+
 // initialize weather
-function initWeather (urlToFetch) {
-    fetch(urlToFetch)
-    .then(res => res.json())
-    .then(solObject => {
-        
-        // here we will populate weather info
+let solObject = [];
+let isTrueOrFalse = true;
+
+function init(urlToFetch) {
+    return fetch(urlToFetch)
+    .then(res => {
+        if(!res.ok) {
+            throw new Error('bad response')
+        } 
+        return res.json();
+    })
+    .then(dataFromFetch => {
+        return dataFromFetch;
+    })
+    .catch(error => {
+        console.log(error);
+    })
+}
+
+function displayData(url) {
+    init(url)
+    .then(dataFromFetch => {
+        let solObject = dataFromFetch;
+        console.log(solObject);
         const terrestrial = solObject.terrestrial_date;
         const earthDate = new Date(terrestrial);
-
+        
         solSpan.innerText = solObject.sol;
         seasonSpan.innerText = solObject.season;
         earthDateSpan.innerText = earthDate.toDateString();
         conditionsSpan.innerText = solObject.atmo_opacity;
         hiTempSpan.innerText = solObject.max_temp + `\xB0` + `C`;
         lowTempSpan.innerText = solObject.min_temp + `\xB0` + `C`;
-
+        
         sunriseSpan.innerText = solObject.sunrise;
         sunsetSpan.innerText = solObject.sunset;
         uvSpan.innerText = solObject.local_uv_irradiance_index;
         pressureSpan.innerText = solObject.pressure_string + ' ' + solObject.pressure;
         humiditySpan.innerText = solObject.abs_humidity || 'not currently available';
         windSpan.innerText = solObject.wind_speed || 'not currently available';
-        
-        toggleButton.addEventListener('click', () => {
-            cOrF();
-        });
-
-        function cOrF() {
-            let isCelsius = hiTempSpan.innerText.includes(`\xB0` + `C`);
-            let isFahrenheit = hiTempSpan.innerText.includes(`\xB0` + `F`);
-            let lowDegreesF = Math.round(convertCToF(solObject.min_temp));
-            let hiDegreesF = Math.round(convertCToF(solObject.max_temp));
-            if(isCelsius) {
-                hiTempSpan.innerText = hiDegreesF + `\xB0` + `F`;
-                lowTempSpan.innerText =  lowDegreesF + `\xB0` + `F`;
-            } else if (isFahrenheit) {
-                hiTempSpan.innerText = Math.round(convertFToC(hiDegreesF)) + `\xB0` + `C`;
-                lowTempSpan.innerText = Math.round(convertFToC(lowDegreesF)) + `\xB0` + `C`;
-            }
-        }
-        function clothingRecs() {
-            const recommendations = weatherObj.sunny.recommendations;
-            recommendations.forEach(rec => {
-                    
-                    // const existingRec = document.querySelector('#recs p');
-                    // console.log(existingRec)
-                
-                const p = document.createElement('p');
-                p.innerText = rec;
-                recsP.append(p);
-            })   
-        }
-        clothingRecs();
-    
     })
-    
 }
+
+function cOrF() {
+    console.log(solObject)
+    let isCelsius = hiTempSpan.innerText.includes(`\xB0` + `C`);
+    let isFahrenheit = hiTempSpan.innerText.includes(`\xB0` + `F`);
+    let lowDegreesF = Math.round(convertCToF(solObject.min_temp));
+    let hiDegreesF = Math.round(convertCToF(solObject.max_temp));
+    console.log(isTrueOrFalse);
+    if(isTrueOrFalse) {
+        console.log('hi');
+        isTrueOrFalse = !isTrueOrFalse;
+        hiTempSpan.innerText = hiDegreesF + `\xB0` + `F`;
+        lowTempSpan.innerText =  lowDegreesF + `\xB0` + `F`;
+    } else {
+        console.log('hello');
+        isTrueOrFalse = !isTrueOrFalse;
+        hiTempSpan.innerText = Math.round(convertFToC(hiDegreesF)) + `\xB0` + `C`;
+        lowTempSpan.innerText = Math.round(convertFToC(lowDegreesF)) + `\xB0` + `C`;
+    }
+}
+
+// weather recs object
+const weatherObj = {
+    sunny: {
+        recommendations: 
+            [`Don't forget your sunscreen!`, `Wear a hat for protection!`, `Drink lots of water today!`]
+    },
+    cloudy: {
+        recommendations: 
+            [`Bring an umbrella in case it rains!`, `Dont forget you can still get a sunburn through the clouds!`, `Wear a light jacket in case it's chilly!`] 
+    },
+    rainy: {
+        recommendations: 
+            [`Bring an umbrella!`, `Wear your rainboots!`, `Don't forget a rain jacket.`]
+    }
+}
+
+function clothingRecs() {
+    const recommendations = weatherObj.sunny.recommendations;
+    recommendations.forEach(rec => {
+        const p = document.createElement('p');
+        p.innerText = rec;
+        recsP.append(p);
+    })   
+}
+clothingRecs();
+
 
 // initialize pictures
 function getRandomSol() {
@@ -206,24 +244,8 @@ function timeOfDay () {
 }
 timeOfDay();
 
-// weather recs object
-const weatherObj = {
-    sunny: {
-        recommendations: 
-            [`Don't forget your sunscreen!`, `Wear a hat for protection!`, `Drink lots of water today!`]
-    },
-    cloudy: {
-        recommendations: 
-            [`Bring an umbrella in case it rains!`, `Dont forget you can still get a sunburn through the clouds!`, `Wear a light jacket in case it's chilly!`] 
-    },
-    rainy: {
-        recommendations: 
-            [`Bring an umbrella!`, `Wear your rainboots!`, `Don't forget a rain jacket.`]
-    }
-}
 
 
 // TO DO:
 // fix toggle temp for searched sol
-// fix rec popups to not repeat if already there
 // error handling for sol search that doesnt exist
