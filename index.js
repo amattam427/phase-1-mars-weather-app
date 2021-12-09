@@ -44,12 +44,11 @@ form.addEventListener('submit', (e) => {
 })
 
 toggleButton.addEventListener('click', () => {
-    console.log('in event');
     cOrF();
 });
 
 // initialize weather
-let solObject = [];
+let solObject;
 let isTrueOrFalse = true;
 
 function init(urlToFetch) {
@@ -65,6 +64,15 @@ function init(urlToFetch) {
     })
     .catch(error => {
         console.log(error);
+        const errorPopup = document.getElementById('error-msg');
+        
+            errorPopup.classList.add('error');
+            errorPopup.innerText = `Oops! That's not a valid sol.`;
+            setTimeout(() => {
+                errorPopup.classList.remove('error');
+                errorPopup.innerHTML = '';
+            }, 2000);
+        
     })
 }
 
@@ -89,23 +97,17 @@ function displayData(url) {
         pressureSpan.innerText = solObject.pressure_string + ' ' + solObject.pressure;
         humiditySpan.innerText = solObject.abs_humidity || 'not currently available';
         windSpan.innerText = solObject.wind_speed || 'not currently available';
-    })
+    });
 }
 
 function cOrF() {
-    console.log(solObject)
-    let isCelsius = hiTempSpan.innerText.includes(`\xB0` + `C`);
-    let isFahrenheit = hiTempSpan.innerText.includes(`\xB0` + `F`);
     let lowDegreesF = Math.round(convertCToF(solObject.min_temp));
     let hiDegreesF = Math.round(convertCToF(solObject.max_temp));
-    console.log(isTrueOrFalse);
     if(isTrueOrFalse) {
-        console.log('hi');
         isTrueOrFalse = !isTrueOrFalse;
         hiTempSpan.innerText = hiDegreesF + `\xB0` + `F`;
         lowTempSpan.innerText =  lowDegreesF + `\xB0` + `F`;
     } else {
-        console.log('hello');
         isTrueOrFalse = !isTrueOrFalse;
         hiTempSpan.innerText = Math.round(convertFToC(hiDegreesF)) + `\xB0` + `C`;
         lowTempSpan.innerText = Math.round(convertFToC(lowDegreesF)) + `\xB0` + `C`;

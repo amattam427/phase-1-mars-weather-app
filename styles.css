@@ -1,5 +1,14 @@
 /* BASIC STYLES */
 
+.error {
+  color: #d8000c;
+  background-color: #ffd2d2;
+  margin: 10px 0px;
+  padding: 12px;
+  font-size: 0.75rem;
+  display: inline-block;
+}
+
 * {
   box-sizing: border-box;
   font-size: 20px;
@@ -66,6 +75,7 @@ img {
 #sol-container {
   padding: 20px;
   margin: 50px;
+  text-align: center;
 }
 
 #sol-container > h4 {
