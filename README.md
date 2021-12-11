@@ -10,25 +10,24 @@ The corresponding date on earth will also appear for the user.
 
 ## deliverables
 
-    * as a user when i load the page , it populates with the weather app home page data
+1. as a user when i load the page , it populates with the weather app home page data
 
-    * as a user when i click on clothing recommendations, a modal pops up displaying
-      information based on todays weather
+2. as a user when i click on clothing recommendations, a modal pops up displaying
+   information based on todays weather
 
-    * as a user i will see a different picture from the mars rover api whenever
-      i load the page
+3. as a user i will see a different picture from the mars rover api whenever
+   i load the page
 
-    * as a user i can click to toggle the temperature between celsius and fahrenheit
+4. as a user i can click to toggle the temperature between celsius and fahrenheit
 
-    * as a user when i visit the app during the morning, afternoon, and night i will
-      see a different background based on the time of day
+5. as a user when i visit the app during the morning, afternoon, and night i will
+   see a different background based on the time of day
 
-    * as a user i can click view more to see extra weather related info
+6. as a user i can click view more to see extra weather related info
 
-    * as a user i can enter a sol number into a form and search for that sol
-      and the app will populate with info from selected sol
+7. as a user i can enter a sol number into a form and search for that sol
+   and the app will populate with info from selected sol
 
 ### creators:
 
-Eleni Papanicolas @e-papanicolas
-Ashley Mattam @amattam427
+Eleni Papanicolas [@e-papanicolas](https://github.com/e-papanicolas) && Ashley Mattam [@amattam427](https://github.com/amattam427)
